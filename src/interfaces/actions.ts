@@ -2,6 +2,6 @@ import { Post } from './post'
 
 export interface Action {
   post: Post
-  previousIndex: number
+  oldIndex: number
   newIndex: number
 }
