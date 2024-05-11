@@ -56,10 +56,26 @@ export const useAppStore = defineStore('app', () => {
     swapIndexes(indexToBeMoved, indexToBeMoved - 1)
   }
 
+  /**
+   *  Rolls back to a specific index of actions
+   * @param index to rollback to.
+   */
+  function rollbackToIndex(index: number) {
+    if (index >= actions.value.length || index < 0) {
+      return
+    }
+    for (let i = actions.value.length - 1; i > index; i--) {
+      const action = actions.value[i]
+      swapIndexes(action.newIndex, action.oldIndex)
+      actions.value.pop()
+    }
+  }
+
   return {
     loadPosts,
     moveIndexUp,
     moveIndexDown,
+    rollbackToIndex,
     posts: computed(() => posts.value),
     isLoadingPosts: computed(() => isLoadingPosts.value),
     actions: computed(() => actions.value),

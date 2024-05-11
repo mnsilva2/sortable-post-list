@@ -9,7 +9,6 @@ const fetchMocker = createFetchMock(vi)
 beforeEach(() => {
   fetchMocker.enableMocks()
   fetchMocker.mockIf('https://jsonplaceholder.typicode.com/posts', () => {
-    console.log('mocked?')
     return JSON.stringify([
       { id: 1 },
       { id: 2 },
@@ -135,5 +134,70 @@ describe('App Store', () => {
       oldIndex: 1,
       newIndex: 0
     })
+  })
+})
+
+describe('rollback', () => {
+  it('rolls back one', async () => {
+    const app = useAppStore()
+    await app.loadPosts()
+    app.moveIndexDown(0)
+    app.moveIndexDown(1)
+    app.rollbackToIndex(0)
+    expect(app.posts).toEqual([
+      'Post 2',
+      'Post 1',
+      'Post 3',
+      'Post 4',
+      'Post 5',
+      'Post 6'
+    ])
+    expect(app.actions.length).toBe(1)
+  })
+
+  it('rolls back multiple', async () => {
+    const app = useAppStore()
+    await app.loadPosts()
+    app.moveIndexDown(0)
+    app.moveIndexDown(1)
+    app.moveIndexDown(2)
+    app.moveIndexDown(3)
+    app.moveIndexDown(0)
+    expect(app.posts).toEqual([
+      'Post 3',
+      'Post 2',
+      'Post 4',
+      'Post 5',
+      'Post 1',
+      'Post 6'
+    ])
+    app.rollbackToIndex(1)
+    expect(app.posts).toEqual([
+      'Post 2',
+      'Post 3',
+      'Post 1',
+      'Post 4',
+      'Post 5',
+      'Post 6'
+    ])
+    expect(app.actions.length).toBe(2)
+  })
+
+  it('rolls back nothing', async () => {
+    const app = useAppStore()
+    await app.loadPosts()
+    app.moveIndexDown(0)
+    app.moveIndexDown(1)
+    app.rollbackToIndex(5)
+    app.rollbackToIndex(-1)
+    expect(app.posts).toEqual([
+      'Post 2',
+      'Post 3',
+      'Post 1',
+      'Post 4',
+      'Post 5',
+      'Post 6'
+    ])
+    expect(app.actions.length).toBe(2)
   })
 })
