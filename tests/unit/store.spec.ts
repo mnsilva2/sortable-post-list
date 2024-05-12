@@ -8,7 +8,7 @@ const fetchMocker = createFetchMock(vi)
 
 beforeEach(() => {
   fetchMocker.enableMocks()
-  fetchMocker.mockIf('https://jsonplaceholder.typicode.com/posts', () => {
+  fetchMocker.mockIf(import.meta.env.VITE_POST_URL, () => {
     return JSON.stringify([
       { id: 1 },
       { id: 2 },

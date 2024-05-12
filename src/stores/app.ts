@@ -30,7 +30,7 @@ export const useAppStore = defineStore('app', () => {
   async function loadPosts() {
     isLoadingPosts.value = true
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const response = await fetch(import.meta.env.VITE_POST_URL)
       const rawPosts: RawPost[] = await response.json()
       posts.value = rawPostsToPosts(rawPosts)
     } catch (e: unknown) {
