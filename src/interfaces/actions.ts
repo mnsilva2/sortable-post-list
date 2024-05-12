@@ -1,14 +1,14 @@
 import { Post } from './post'
 type ComandType = 'move'
 export interface Action<T extends ComandType = 'move'> {
-  post: Post
-  command: T
-  id: string
+  readonly post: Post
+  readonly command: T
+  readonly id: string
 }
 
 export interface MoveAction extends Action<'move'> {
-  oldIndex: number
-  newIndex: number
+  readonly oldIndex: number
+  readonly newIndex: number
 }
 
 export function actionIsMoveAction(
