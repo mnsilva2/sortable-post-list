@@ -14,13 +14,17 @@ const store = useAppStore()
       <transition-group
         v-if="store.actions.length"
         name="history-list"
-        class="flex flex-col gap-2"
+        class="flex flex-col"
         tag="div"
       >
         <history-card
           v-for="(action, index) in store.actions"
           :key="action.id"
           :action="action"
+          :class="[
+            index < store.actions.length - 1 && 'rounded-b-none',
+            index > 0 && 'rounded-t-none border-t border-t-gray-300'
+          ]"
           class="z-10 relative"
           @rollback="store.rollbackToIndex(index)"
         />

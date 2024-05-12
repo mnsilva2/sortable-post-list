@@ -17,7 +17,7 @@ onMounted(() => {
   >
     <div class="flex max-w-7xl w-full flex-col md:flex-row z-10">
       <div class="w-full md:w-1/2 p-4 lg:p-8">
-        <div class="text-2xl mb-4">Sortable Post List</div>
+        <div class="text-2xl mb-4 text-white">Sortable Post List</div>
         <post-list />
       </div>
 
@@ -25,10 +25,12 @@ onMounted(() => {
         <history-list class="max-h-full" />
       </div>
     </div>
-    <div
-      class="absolute w-full h-[150vw] bg-blue-400 origin-top-right rotate-[67.5deg]"
-    ></div>
+    <div class="absolute w-full h-full bg-purple-800 triangle-clip-path"></div>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.triangle-clip-path {
+  clip-path: polygon(0 0, 100% 0%, 0 33%);
+}
+</style>
