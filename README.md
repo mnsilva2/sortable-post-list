@@ -2,6 +2,8 @@
 
 A simple web app that loads a post list, allows the user to sort them and time travel back to a previous state.
 
+Deployed [here](https://sortable-post-list.mnsilva.com/) with Cloudflare pages
+
 ![The Application](/images/app.png)
 
 The web application was built with:
