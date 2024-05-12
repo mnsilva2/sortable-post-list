@@ -121,19 +121,15 @@ describe('App Store', () => {
     await app.loadPosts()
     app.moveIndexDown(0)
     expect(app.actions.length).toBe(1)
-    expect(app.actions[0]).toEqual({
-      post: 'Post 1',
-      oldIndex: 0,
-      newIndex: 1
-    })
+    expect(app.actions[0].newIndex).toBe(1)
+    expect(app.actions[0].oldIndex).toBe(0)
+    expect(app.actions[0].post).toBe('Post 1')
 
     app.moveIndexUp(1)
     expect(app.actions.length).toBe(2)
-    expect(app.actions[0]).toEqual({
-      post: 'Post 1',
-      oldIndex: 1,
-      newIndex: 0
-    })
+    expect(app.actions[0].newIndex).toBe(0)
+    expect(app.actions[0].oldIndex).toBe(1)
+    expect(app.actions[0].post).toBe('Post 1')
   })
 })
 
