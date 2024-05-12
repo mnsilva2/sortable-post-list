@@ -1,9 +1,66 @@
-# Vue 3 + TypeScript + Vite
+# Sortable Post List
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A simple web app that loads a post list, allows the user to sort them and time travel back to a previous state.
 
-## Recommended Setup
+![The Application](/images/app.png)
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+The web application was built with:
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+- Vue 3
+- Tailwind (CSS framework)
+- Vitest + Vue Test Utils (Unit / Component testing)
+- Pinia (state management)
+
+## Project Setup (Development)
+
+1. Install the dependencies:
+
+```sh
+npm install
+```
+
+2. Compile and hot-reload in development mode:
+
+```sh
+npm run dev
+```
+
+## All Commands Available
+
+### Install Dependencies
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Run Tests with [Vitest](https://vitest.dev/)
+
+```sh
+npm run test
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
+
+Run `npm run lint:fix` to automatically fix issues.
+
+### Format the project with [Prettier](https://prettier.io/)
+
+```sh
+npm run format
+```

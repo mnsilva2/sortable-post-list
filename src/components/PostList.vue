@@ -14,7 +14,6 @@ function onMovedUp(index: number) {
 }
 
 function onMovedDown(index: number) {
-  console.log('onMoveDown', index)
   store.moveIndexDown(index)
 }
 </script>
@@ -41,17 +40,9 @@ function onMovedDown(index: number) {
 </template>
 
 <style scoped>
-.post-list-move,
-.post-list-enter-active,
-.post-list-leave-active {
+.post-list-move {
   @apply transition-all;
 }
-
-/* .list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-} */
 
 .post-list-leave-active {
   @apply absolute;

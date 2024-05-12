@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import BaseCard from './BaseCard.vue'
-import { Action } from '../interfaces/actions'
+import { AvailableAction, actionIsMoveAction } from '../interfaces/actions'
 import { computed } from 'vue'
 const props = defineProps<{
   /** The Action that is shown */
-  action: Action
+  action: AvailableAction
 }>()
 
 defineEmits<{
   (e: 'rollback'): void
 }>()
 
-const title = computed(
-  () =>
-    `Moved ${props.action.post} from index ${props.action.oldIndex} to ${props.action.newIndex}`
-)
+const title = computed(() => {
+  if (actionIsMoveAction(props.action)) {
+    return `Moved ${props.action.post} from index ${props.action.oldIndex} to ${props.action.newIndex}`
+  }
+  return ''
+})
 </script>
 <template>
   <base-card class="p-2 flex">

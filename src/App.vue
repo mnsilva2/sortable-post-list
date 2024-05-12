@@ -26,14 +26,12 @@ onMounted(() => {
           <history-list class="max-h-full" />
         </div>
       </div>
-      <div
-        class="absolute w-full h-full bg-purple-800 triangle-clip-path"
-      ></div>
+      <div class="absolute w-full h-full bg-[#6357b1] triangle-clip-path"></div>
     </template>
     <div v-else class="h-full pt-20 flex flex-col gap-2">
-      <span class="text-2xl"
-        >Oh no! Something went wrong while loading the application!</span
-      >
+      <span class="text-2xl">
+        Oh no! Something went wrong while loading the application!
+      </span>
       <pre class="text-sm">{{ store.error }}</pre>
     </div>
   </main>

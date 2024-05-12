@@ -24,11 +24,13 @@ defineEmits<{
       <icon-button
         v-if="canMoveUp"
         :icon="faChevronUp"
+        title="Move Post Up"
         @click="$emit('moved-up')"
       />
       <icon-button
         v-if="canMoveDown"
         :icon="faChevronDown"
+        title="Move Post Down"
         @click="$emit('moved-down')"
       />
     </div>
