@@ -21,8 +21,8 @@ onMounted(() => {
         <post-list />
       </div>
 
-      <div class="w-full md:w-1/2 p-4 lg:p-8">
-        <history-list />
+      <div class="max-h-full w-full md:w-1/2 p-4 lg:p-8 overflow-hidden">
+        <history-list class="max-h-full" />
       </div>
     </div>
     <div

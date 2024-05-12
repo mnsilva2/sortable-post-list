@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import PostCard from './PostCard.vue'
+import PostCardBlank from './PostCardBlank.vue'
 import { useAppStore } from '../stores/app'
 
 const store = useAppStore()
@@ -18,7 +19,12 @@ function onMovedDown(index: number) {
 }
 </script>
 <template>
-  <div class="flex flex-col gap-2">
+  <transition-group
+    v-if="!store.isLoadingPosts"
+    name="post-list"
+    tag="div"
+    class="flex flex-col gap-2"
+  >
     <post-card
       v-for="(post, index) in filteredPosts"
       :key="post"
@@ -28,7 +34,26 @@ function onMovedDown(index: number) {
       @moved-up="onMovedUp(index)"
       @moved-down="onMovedDown(index)"
     />
+  </transition-group>
+  <div v-else class="flex flex-col gap-2">
+    <post-card-blank v-for="n in 5" :key="n" />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.post-list-move,
+.post-list-enter-active,
+.post-list-leave-active {
+  @apply transition-all;
+}
+
+/* .list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+} */
+
+.post-list-leave-active {
+  @apply absolute;
+}
+</style>

@@ -6,19 +6,41 @@ import { useAppStore } from '../stores/app'
 const store = useAppStore()
 </script>
 <template>
-  <base-card>
+  <base-card class="flex flex-col overflow-hidden">
     <div class="p-2 grow flex items-center text-lg">
       List of actions commited
     </div>
-    <div class="p-4 flex flex-col gap-2 bg-gray-300">
-      <history-card
-        v-for="(action, index) in store.actions"
-        :key="index"
-        :action="action"
-        @rollback="store.rollbackToIndex(index)"
-      />
+    <div class="p-4 bg-gray-300 overflow-auto">
+      <transition-group
+        v-if="store.actions.length"
+        name="history-list"
+        class="flex flex-col gap-2"
+        tag="div"
+      >
+        <history-card
+          v-for="(action, index) in store.actions"
+          :key="action.id"
+          :action="action"
+          class="z-10 relative"
+          @rollback="store.rollbackToIndex(index)"
+        />
+      </transition-group>
+      <div v-else class="flex justify-center italic">
+        No Actions were made yet
+      </div>
     </div>
   </base-card>
 </template>
 
-<style scoped></style>
+<style scoped>
+.history-list-move,
+.history-list-enter-active,
+.history-list-leave-active {
+  @apply transition-all duration-200;
+}
+
+.history-list-enter-from,
+.history-list-leave-to {
+  @apply opacity-0 -mt-14;
+}
+</style>
