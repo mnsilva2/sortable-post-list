@@ -13,7 +13,7 @@ defineEmits<{
 
 const title = computed(() => {
   if (actionIsMoveAction(props.action)) {
-    return `Moved ${props.action.post} from index ${props.action.oldIndex} to ${props.action.newIndex}`
+    return `Moved ${props.action.post} from index ${props.action.oldIndex} to index ${props.action.newIndex}`
   }
   return ''
 })

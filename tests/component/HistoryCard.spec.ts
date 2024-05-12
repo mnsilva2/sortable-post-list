@@ -16,7 +16,9 @@ describe('HistoryCard', () => {
       }
     })
     expect(wrapper.exists()).toBe(true)
-    expect(wrapper.text()).toEqual('Moved Post 1 from index 0 to 1 Time Travel')
+    expect(wrapper.text()).toEqual(
+      'Moved Post 1 from index 0 to index 1 Time Travel'
+    )
   })
 
   it('emits time travel', async () => {
