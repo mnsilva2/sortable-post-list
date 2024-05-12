@@ -7,7 +7,7 @@ const store = useAppStore()
 </script>
 <template>
   <base-card class="flex flex-col overflow-hidden">
-    <div class="p-2 grow flex items-center text-lg">
+    <div class="m-5 grow flex items-center text-xl">
       List of actions commited
     </div>
     <div class="p-4 bg-gray-300 overflow-auto">
@@ -29,9 +29,9 @@ const store = useAppStore()
           @time-travel="store.timeTravelToIndex(index)"
         />
       </transition-group>
-      <div v-else class="flex justify-center italic">
+      <base-card v-else class="flex justify-center italic p-4">
         No Actions were made yet
-      </div>
+      </base-card>
     </div>
   </base-card>
 </template>
