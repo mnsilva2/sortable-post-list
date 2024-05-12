@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import { Action } from '../interfaces/actions'
 import BaseCard from './BaseCard.vue'
 import HistoryCard from './HistoryCard.vue'
-const actions: Action[] = [
-  {
-    post: 'Post 1',
-    newIndex: 1,
-    previousIndex: 0
-  },
-  {
-    post: 'Post 0',
-    newIndex: 1,
-    previousIndex: 0
-  }
-]
+import { useAppStore } from '../stores/app'
+
+const store = useAppStore()
 </script>
 <template>
   <base-card>
@@ -22,9 +12,10 @@ const actions: Action[] = [
     </div>
     <div class="p-4 flex flex-col gap-2 bg-gray-300">
       <history-card
-        v-for="(action, index) in actions"
+        v-for="(action, index) in store.actions"
         :key="index"
         :action="action"
+        @rollback="store.rollbackToIndex(index)"
       />
     </div>
   </base-card>

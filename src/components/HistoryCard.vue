@@ -3,12 +3,17 @@ import BaseCard from './BaseCard.vue'
 import { Action } from '../interfaces/actions'
 import { computed } from 'vue'
 const props = defineProps<{
+  /** The Action that is shown */
   action: Action
+}>()
+
+defineEmits<{
+  (e: 'rollback'): void
 }>()
 
 const title = computed(
   () =>
-    `Moved ${props.action.post} from index ${props.action.previousIndex} to ${props.action.newIndex}`
+    `Moved ${props.action.post} from index ${props.action.oldIndex} to ${props.action.newIndex}`
 )
 </script>
 <template>
@@ -18,6 +23,7 @@ const title = computed(
       <button
         class="py-2 px-4 rounded-sm bg-yellow-200 hover:bg-yellow-300 active:bg-yellow-400 transition-colors"
         type="button"
+        @click="$emit('rollback')"
       >
         Time Travel
       </button>

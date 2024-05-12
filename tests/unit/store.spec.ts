@@ -129,7 +129,7 @@ describe('App Store', () => {
 
     app.moveIndexUp(1)
     expect(app.actions.length).toBe(2)
-    expect(app.actions[1]).toEqual({
+    expect(app.actions[0]).toEqual({
       post: 'Post 1',
       oldIndex: 1,
       newIndex: 0
@@ -143,7 +143,7 @@ describe('rollback', () => {
     await app.loadPosts()
     app.moveIndexDown(0)
     app.moveIndexDown(1)
-    app.rollbackToIndex(0)
+    app.rollbackToIndex(1)
     expect(app.posts).toEqual([
       'Post 2',
       'Post 1',
@@ -171,7 +171,7 @@ describe('rollback', () => {
       'Post 1',
       'Post 6'
     ])
-    app.rollbackToIndex(1)
+    app.rollbackToIndex(3)
     expect(app.posts).toEqual([
       'Post 2',
       'Post 3',

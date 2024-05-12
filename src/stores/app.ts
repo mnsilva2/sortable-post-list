@@ -35,7 +35,7 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     const post = posts.value[indexToBeMoved]
-    actions.value.push({
+    actions.value.unshift({
       post,
       oldIndex: indexToBeMoved,
       newIndex: indexToBeMoved + 1
@@ -48,7 +48,7 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     const post = posts.value[indexToBeMoved]
-    actions.value.push({
+    actions.value.unshift({
       post,
       oldIndex: indexToBeMoved,
       newIndex: indexToBeMoved - 1
@@ -64,11 +64,11 @@ export const useAppStore = defineStore('app', () => {
     if (index >= actions.value.length || index < 0) {
       return
     }
-    for (let i = actions.value.length - 1; i > index; i--) {
+    for (let i = 0; i < index; i++) {
       const action = actions.value[i]
       swapIndexes(action.newIndex, action.oldIndex)
-      actions.value.pop()
     }
+    actions.value.splice(0, index)
   }
 
   return {
