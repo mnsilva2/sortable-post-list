@@ -1,13 +1,17 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { Post, RawPost } from '../interfaces/post'
-import { Action } from '../interfaces/actions'
+import {
+  AvailableAction,
+  MoveAction,
+  actionIsMoveAction
+} from '../interfaces/actions'
 import { UUID, rawPostsToPosts } from '../misc/post-utils'
 
 export const useAppStore = defineStore('app', () => {
   const posts = ref<Post[]>([])
   const isLoadingPosts = ref(false)
-  const actions = ref<Action[]>([])
+  const actions = ref<AvailableAction[]>([])
 
   const error = ref<string | undefined>(undefined)
 
@@ -35,12 +39,14 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     const post = posts.value[indexToBeMoved]
-    actions.value.unshift({
+    const moveAction: MoveAction = {
       post,
+      command: 'move',
       oldIndex: indexToBeMoved,
       newIndex: indexToBeMoved + 1,
       id: UUID()
-    })
+    }
+    actions.value.unshift(moveAction)
     swapIndexes(indexToBeMoved, indexToBeMoved + 1)
   }
 
@@ -49,12 +55,14 @@ export const useAppStore = defineStore('app', () => {
       return
     }
     const post = posts.value[indexToBeMoved]
-    actions.value.unshift({
+    const moveAction: MoveAction = {
       post,
+      command: 'move',
       oldIndex: indexToBeMoved,
       newIndex: indexToBeMoved - 1,
       id: UUID()
-    })
+    }
+    actions.value.unshift(moveAction)
     swapIndexes(indexToBeMoved, indexToBeMoved - 1)
   }
 
@@ -68,7 +76,9 @@ export const useAppStore = defineStore('app', () => {
     }
     for (let i = 0; i < index; i++) {
       const action = actions.value[i]
-      swapIndexes(action.newIndex, action.oldIndex)
+      if (actionIsMoveAction(action)) {
+        swapIndexes(action.newIndex, action.oldIndex)
+      }
     }
     actions.value.splice(0, index)
   }

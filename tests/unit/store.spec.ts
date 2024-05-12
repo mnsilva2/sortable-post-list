@@ -124,12 +124,14 @@ describe('App Store', () => {
     expect(app.actions[0].newIndex).toBe(1)
     expect(app.actions[0].oldIndex).toBe(0)
     expect(app.actions[0].post).toBe('Post 1')
+    expect(app.actions[0].command).toBe('move')
 
     app.moveIndexUp(1)
     expect(app.actions.length).toBe(2)
     expect(app.actions[0].newIndex).toBe(0)
     expect(app.actions[0].oldIndex).toBe(1)
     expect(app.actions[0].post).toBe('Post 1')
+    expect(app.actions[0].command).toBe('move')
   })
 })
 

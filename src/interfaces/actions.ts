@@ -1,8 +1,20 @@
 import { Post } from './post'
-
-export interface Action {
+type ComandType = 'move'
+export interface Action<T extends ComandType = 'move'> {
   post: Post
-  oldIndex: number
-  newIndex: number
+  command: T
   id: string
 }
+
+export interface MoveAction extends Action<'move'> {
+  oldIndex: number
+  newIndex: number
+}
+
+export function actionIsMoveAction(
+  action: AvailableAction
+): action is MoveAction {
+  return action.command === 'move'
+}
+
+export type AvailableAction = MoveAction
