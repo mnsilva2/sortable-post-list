@@ -32,6 +32,6 @@ describe('HistoryCard', () => {
       }
     })
     await wrapper.find('button').trigger('click')
-    expect(wrapper.emitted('rollback')).toBeDefined()
+    expect(wrapper.emitted('time-travel')).toBeDefined()
   })
 })

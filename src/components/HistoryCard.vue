@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 defineEmits<{
-  (e: 'rollback'): void
+  (e: 'time-travel'): void
 }>()
 
 const title = computed(() => {
@@ -25,7 +25,7 @@ const title = computed(() => {
       <button
         class="py-2 px-4 rounded-sm bg-green-400 hover:bg-green-500 active:bg-green-600 transition-colors"
         type="button"
-        @click="$emit('rollback')"
+        @click="$emit('time-travel')"
       >
         Time Travel
       </button>

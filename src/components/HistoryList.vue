@@ -26,7 +26,7 @@ const store = useAppStore()
             index > 0 && 'rounded-t-none border-t border-t-gray-300'
           ]"
           class="z-10 relative"
-          @rollback="store.rollbackToIndex(index)"
+          @time-travel="store.timeTravelToIndex(index)"
         />
       </transition-group>
       <div v-else class="flex justify-center italic">

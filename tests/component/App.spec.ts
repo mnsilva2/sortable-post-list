@@ -65,10 +65,11 @@ describe('App', () => {
     expect(wrapper.findAllComponents(PostCard)[2].text()).toBe('Post 1')
     expect(wrapper.findAllComponents(HistoryCard).length).toBe(2)
 
-    wrapper.findAllComponents(HistoryCard)[1].vm.$emit('rollback')
+    // time travel to the initial state
+    wrapper.findAllComponents(HistoryCard)[1].vm.$emit('time-travel')
     await nextTick()
     expect(wrapper.findAllComponents(PostCard)[2].text()).not.toBe('Post 1')
-    expect(wrapper.findAllComponents(PostCard)[1].text()).toBe('Post 1')
-    expect(wrapper.findAllComponents(HistoryCard).length).toBe(1)
+    expect(wrapper.findAllComponents(PostCard)[0].text()).toBe('Post 1')
+    expect(wrapper.findAllComponents(HistoryCard).length).toBe(0)
   })
 })

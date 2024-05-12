@@ -82,27 +82,27 @@ export const useAppStore = defineStore('app', () => {
   }
 
   /**
-   * Rolls back to a specific index of actions.
-   * @param index to rollback to.
+   * time travels back to a specific index of actions (inclusive)
+   * @param index to time travel to.
    */
-  function rollbackToIndex(index: number) {
+  function timeTravelToIndex(index: number) {
     if (index >= actions.value.length || index < 0) {
       return
     }
-    for (let i = 0; i < index; i++) {
+    for (let i = 0; i <= index; i++) {
       const action = actions.value[i]
       if (actionIsMoveAction(action)) {
         swapIndexes(action.newIndex, action.oldIndex)
       }
     }
-    actions.value.splice(0, index)
+    actions.value.splice(0, index + 1)
   }
 
   return {
     loadPosts,
     moveIndexUp,
     moveIndexDown,
-    rollbackToIndex,
+    timeTravelToIndex,
     /** A computed value with the list of loaded posts. */
     posts: computed(() => posts.value),
     /** A computed value  with the loading state of the posts. */

@@ -135,25 +135,25 @@ describe('App Store', () => {
   })
 })
 
-describe('rollback', () => {
-  it('rolls back one', async () => {
+describe('time-travel', () => {
+  it('time travels back one', async () => {
     const app = useAppStore()
     await app.loadPosts()
     app.moveIndexDown(0)
     app.moveIndexDown(1)
-    app.rollbackToIndex(1)
+    app.timeTravelToIndex(1)
     expect(app.posts).toEqual([
-      'Post 2',
       'Post 1',
+      'Post 2',
       'Post 3',
       'Post 4',
       'Post 5',
       'Post 6'
     ])
-    expect(app.actions.length).toBe(1)
+    expect(app.actions.length).toBe(0)
   })
 
-  it('rolls back multiple', async () => {
+  it('time travels back multiple', async () => {
     const app = useAppStore()
     await app.loadPosts()
     app.moveIndexDown(0)
@@ -169,25 +169,25 @@ describe('rollback', () => {
       'Post 1',
       'Post 6'
     ])
-    app.rollbackToIndex(3)
+    app.timeTravelToIndex(3)
     expect(app.posts).toEqual([
       'Post 2',
-      'Post 3',
       'Post 1',
+      'Post 3',
       'Post 4',
       'Post 5',
       'Post 6'
     ])
-    expect(app.actions.length).toBe(2)
+    expect(app.actions.length).toBe(1)
   })
 
-  it('rolls back nothing', async () => {
+  it('time travels back nothing', async () => {
     const app = useAppStore()
     await app.loadPosts()
     app.moveIndexDown(0)
     app.moveIndexDown(1)
-    app.rollbackToIndex(5)
-    app.rollbackToIndex(-1)
+    app.timeTravelToIndex(5)
+    app.timeTravelToIndex(-1)
     expect(app.posts).toEqual([
       'Post 2',
       'Post 3',
